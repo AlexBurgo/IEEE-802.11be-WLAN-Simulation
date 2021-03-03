@@ -8,5 +8,5 @@ function distanceToAP = DistanceToAP(AP, xSTA, ySTA)
 
 % euclidean-distance
 distanceToAP = sqrt((xSTA - AP(1))^2 + (ySTA - AP(2))^2);
-% escrito desde vscode
+
 end

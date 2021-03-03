@@ -22,11 +22,10 @@ i = 1; % iterator
 b = 10; h = 10; % base & height
 AP = [b/2 h/2]; % central AP
 nSTAs = 20; % number of stations
+P_tx = 21 % transmitted power by AP in (dBm)
 draw_scenario = 1; % 1 - to plot the room, 0 - to not plot.
 coordinates = zeros(nSTAs,2);
 distance = zeros(nSTAs,1);
-
-% UTILITZAR 21 dbm com a Tx
 
 while i <= nSTAs
     
@@ -44,6 +43,8 @@ while i <= nSTAs
     distance(i) = DistanceToAP(AP,coordinates(i,1),coordinates(i,2));
     i = i+1;
 end
+
+P_rx = STAPowerReceived(P_tx, distance(iterator));
 
 if (draw_scenario == 1) 
     pgon = polyshape([0 0 b h],[h 0 0 b]); % creates the simulation area
