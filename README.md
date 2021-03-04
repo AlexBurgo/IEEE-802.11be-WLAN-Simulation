@@ -1,5 +1,5 @@
 # TFG Matlab Project Code
 
-## developers 
+## Developers 
 * [Alex Burgo](https://github.com/AlexBurgo) 
 
