@@ -57,6 +57,8 @@ end
 distance = sort(distance,'ascend');
 P_rx = sort(P_rx,'descend');
 
-if (draw == 1); drawScenario(draw, b, h, P_rx, distance); end
+if (draw == 1); draw_scenario(draw, b, h, P_rx, distance); end
+
+SingleSTA_throughput();    
 
 toc; % timer
