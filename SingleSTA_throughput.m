@@ -24,7 +24,4 @@ S_80 = S_80/1E6;
 fprintf("Throughput at: 20 MHz, T = %.4f Mbps \n", S_20);
 fprintf("Throughput at: 40 MHz, T = %.4f Mbps \n", S_80);
 
-%disp('Throughput: 20 MHz | 40 MHz');
-%disp([S_20 S_80]);
-
 end

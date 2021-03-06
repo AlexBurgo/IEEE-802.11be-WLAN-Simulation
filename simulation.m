@@ -50,7 +50,6 @@ while i <= nSTAs
     if (draw == 1); plot(xSTA, ySTA, "*b", 'MarkerSize', 3); end % plots the STA
     distance(i) = DistanceToAP(AP,coordinates(i,1),coordinates(i,2));
     P_rx(i) = STAPowerReceived(P_tx, distance(i), lambda, L_o, k, W); % received power
-    %fprintf('The received power is %.4f dBm\n', P_rx);
     i = i+1;
 end
 
