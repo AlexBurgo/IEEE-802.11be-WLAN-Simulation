@@ -1,3 +1,9 @@
+% Si proves diferents valors de BW, has de tenir en compte que la potència
+% tx és reparteix en el total d'amplada de banda, que és equivalent a dir 
+% que la potència per subcarrier es redueix a la meitat, i que per tant, 
+% augmentar el BW pot suposar una reducció del MCS a fer servir.
+
+% tx/Bw???
 
 function SingleSTA_throughput()
 
@@ -8,8 +14,8 @@ L=12000;
 NSS=2; 
 MCS=9;
 MCSbasic=9;
+BW=320; % Bandwidth
 
-BW=320; % bandwidth
 [T_20]=WiFiTransmissionTimeBasic(L,BW,MCS,MCSbasic,NSS);
 S_20 = L/T_20;
 
