@@ -3,18 +3,16 @@
 % que la potència per subcarrier es redueix a la meitat, i que per tant, 
 % augmentar el BW pot suposar una reducció del MCS a fer servir.
 
-% tx/Bw???
-
 function SingleSTA_throughput()
 
 % An AP tx to a STA using MCS = 8
 % since there are no other STAs, MCSbasic = MCS
 
-L=12000;
-NSS=2; 
-MCS=9;
-MCSbasic=9;
-BW=320; % Bandwidth
+L=12000;    % packet size (bits)
+NSS=2;      % SU spatial streams.
+MCS=9;      % data rate
+MCSbasic=9; % basic data rate (set to the minimum rate of the BSS)
+BW=320;     % Bandwidth
 
 [T_20]=WiFiTransmissionTimeBasic(L,BW,MCS,MCSbasic,NSS);
 S_20 = L/T_20;
