@@ -9,7 +9,7 @@ clear all; clc; hold on;
 i = 1; % iterator
 b = 10; h = 10; % base & height
 AP = [b/2 h/2]; % central AP
-nSTAs = 80; % number of stations
+nSTAs = 20; % number of stations
 P_tx = 21; % transmitted power by AP in dBm
 
 draw = 1; % 1 - to plot the room, 0 - to not plot.
@@ -46,7 +46,5 @@ distance = sort(distance,'ascend');
 P_rx = sort(P_rx,'descend');
 
 if (draw == 1); draw_scenario(draw, b, h, P_rx, distance); end
-
-%SingleSTA_throughput(P_rx);    
 
 toc; % timer

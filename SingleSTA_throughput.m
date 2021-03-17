@@ -20,10 +20,10 @@ function SingleSTA_throughput(P_rx)
 L=12000;    % packet size (bits)
 NSS=2;      % SU spatial streams.
 % MCS=9;      % data rate
-% MCSbasic=9; % basic data rate (set to the minimum rate of the BSS)
-BW=160;     % Bandwidth
+MCSbasic=9; % basic data rate (set to the minimum rate of the BSS)
+BW=40;     % Bandwidth
 
-MCS = MCS(BW,P_rx); % modulation coding scheme
+MCS = modulation(BW,P_rx); % modulation coding scheme
 
 [T_20]=WiFiTransmissionTimeBasic(L,BW,MCS,MCSbasic,NSS,P_rx);
 S_20 = L/T_20;

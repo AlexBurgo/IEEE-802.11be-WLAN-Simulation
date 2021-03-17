@@ -1,8 +1,8 @@
 
 
-function MCS = MCS(BW,P_rx)
+function MCS = modulation(BW,P_rx)
 
-    switch BW
+switch BW
     case 20
         MCS = MCS_for_20(P_rx)
     case 40

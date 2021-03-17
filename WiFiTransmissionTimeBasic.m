@@ -11,35 +11,10 @@ function [T] = WiFiTransmissionTimeBasic(L,BW,MCS,MCSbasic,NSS,P_rx)
 
 dprop = 20/3E8; % Propagation delay
 
-%switch P_rx
-%case 'string'
-%    
-%end
-
 switch BW
     case 20
         Ns = 234;
-        if P_rx < -82 
-            MCS = 0;
-        elseif P_rx > -82 && P_rx < -79
-            MCS = 1;
-        elseif P_rx > -79 && P_rx < -77
-            MCS = 2;
-        elseif P_rx > -77 && P_rx < -74
-            MCS = 3;
-        elseif P_rx > -74 && P_rx < -70
-            MCS = 4;
-        elseif P_rx > -70 && P_rx < -66
-            MCS = 5;
-        elseif P_rx > -66 && P_rx < -65
-            MCS = 6;
-        elseif P_rx > -65 && P_rx < -64
-            MCS = 7;
-        elseif P_rx > -64 && P_rx < -59
-            MCS = 8;
-        elseif P_rx > -59 && P_rx < -57
-            MCS = 9;
-        end
+
     case 40
         Ns = 468;
         
