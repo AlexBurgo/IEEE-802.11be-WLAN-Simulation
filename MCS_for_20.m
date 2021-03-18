@@ -2,7 +2,7 @@
 
 function MCS = MCS_for_20(P_rx)
 
-    if P_rx > -82 P_rx < -79
+    if P_rx > -82 && P_rx < -79
         MCS = 0;
     elseif P_rx > -79 && P_rx < -77
         MCS = 1;

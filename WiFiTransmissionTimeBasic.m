@@ -14,7 +14,7 @@ dprop = 20/3E8; % Propagation delay
 switch BW
     case 20
         Ns = 234;
-
+        
     case 40
         Ns = 468;
         

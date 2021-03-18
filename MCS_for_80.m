@@ -1,5 +1,6 @@
 
 
+
 function MCS = MCS_for_80(P_rx)
 
     if P_rx > -76 && P_rx < -73 

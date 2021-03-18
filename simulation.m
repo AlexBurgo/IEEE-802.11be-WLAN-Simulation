@@ -4,12 +4,12 @@
 % calcular la potència rebuda, escollir el MCS a fer servir, i finalment 
 % treure el throughput que pot assolir cada estació. 
 
-tic; % timer
+% tic; % timer
 clear all; clc; hold on;
 i = 1; % iterator
 b = 10; h = 10; % base & height
 AP = [b/2 h/2]; % central AP
-nSTAs = 20; % number of stations
+nSTAs = 10; % number of stations
 P_tx = 21; % transmitted power by AP in dBm
 
 draw = 1; % 1 - to plot the room, 0 - to not plot.
@@ -47,4 +47,4 @@ P_rx = sort(P_rx,'descend');
 
 if (draw == 1); draw_scenario(draw, b, h, P_rx, distance); end
 
-toc; % timer
+% toc; % timer
