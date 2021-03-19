@@ -17,28 +17,30 @@ function SingleSTA_throughput(P_rx)
 % An AP tx to a STA using MCS = 8
 % since there are no other STAs, MCSbasic = MCS
 
-L=12e3;    % packet size (bits)
+L=12e3;     % packet size (bits)
 NSS=2;      % SU spatial streams.
 %MCS=9;      % data rate
 %MCSbasic=9; % basic data rate (set to the minimum rate of the BSS)
 
 BW=20;  % Bandwidth
-MCS = modulation(BW,P_rx); % modulation coding scheme
+MCS = modulationSelection(BW,P_rx); % modulation coding scheme
 MCSbasic = MCS;
-[T_20]=WiFiTransmissionTimeBasic(L,BW,MCS,MCSbasic,NSS,P_rx);
-S_20 = L/T_20;
+[T_20]=wifiTransmissionTimeBasic(L,BW,MCS,MCSbasic,NSS,P_rx);
+S_20 = L/T_20; 
 S_20 = S_20/1E6; % scale bps to Mbps
-fprintf("The MCS used for B = %dMHz is %d\n", BW, MCS);
+
+fprintf("For B = %dMHz the MCS = %d\n", BW, MCS);
 fprintf("Throughput and Transmission Time with: %dMHz " + newline + ... 
 "T = %.4f Mbps, TxTime = %f secs\n\n", BW, S_20, T_20);
 
 BW=80;  % Bandwidth
-MCS = modulation(BW,P_rx); % modulation coding scheme
+MCS = modulationSelection(BW,P_rx); % modulation coding scheme
 MCSbasic = MCS;
-[T_80]=WiFiTransmissionTimeBasic(L,BW,MCS,MCSbasic,NSS,P_rx);
+[T_80]=wifiTransmissionTimeBasic(L,BW,MCS,MCSbasic,NSS,P_rx);
 S_80 = L/T_80;
 S_80 = S_80/1E6; % scale bps to Mbps
-fprintf("The MCS used for B = %dMHz is %d\n", BW, MCS);
+
+fprintf("For B = %dMHz the MCS = %d\n", BW, MCS);
 fprintf("Throughput and Transmission Time with: %dMHz " + newline + ... 
 "T = %.4f Mbps, TxTime = %f secs\n\n", BW, S_80, T_80);
 

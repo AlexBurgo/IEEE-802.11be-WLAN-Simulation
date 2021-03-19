@@ -1,6 +1,6 @@
 % Draw the scenario simulation area and the received power graphic per distance
 
-function draw_scenario(draw_scenario, b, h, P_rx, distance)
+function drawScenario(draw_scenario, b, h, P_rx, distance)
 
 pgon = polyshape([0 0 b h],[h 0 0 b]); % creates the simulation area
 pg = plot(pgon); % plots the simulation area

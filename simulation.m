@@ -7,7 +7,7 @@
 % tic; % timer
 clear all; clc; hold on;
 i = 1; % iterator
-b = 10; h = 10; % base & height
+b = 15; h = 15; % base & height
 AP = [b/2 h/2]; % central AP
 nSTAs = 10; % number of stations
 P_tx = 21; % transmitted power by AP in dBm
@@ -36,8 +36,10 @@ while i <= nSTAs
         break;
     end
     if (draw == 1); plot(xSTA, ySTA, "*b", 'MarkerSize', 3); end % plots the STA
-    distance(i) = DistanceToAP(AP,coordinates(i,1),coordinates(i,2));
+    
+    distance(i) = distanceToAP(AP,coordinates(i,1),coordinates(i,2));
     P_rx(i) = STAPowerReceived(P_tx, distance(i), lambda, L_o, k, W); % received power
+    fprintf("--------------- STA number %d ---------------\n\n", i);
     SingleSTA_throughput(P_rx(i));
     i = i+1;
 end
@@ -45,6 +47,6 @@ end
 distance = sort(distance,'ascend');
 P_rx = sort(P_rx,'descend');
 
-if (draw == 1); draw_scenario(draw, b, h, P_rx, distance); end
+if (draw == 1); drawScenario(draw, b, h, P_rx, distance); end
 
 % toc; % timer

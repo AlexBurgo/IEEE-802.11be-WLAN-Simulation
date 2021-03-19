@@ -1,6 +1,6 @@
 
 
-function MCS = MCS_for_40(P_rx)
+function MCS = mcsFor40(P_rx)
 
     if P_rx > -79 && P_rx < -76 
         MCS = 0;
