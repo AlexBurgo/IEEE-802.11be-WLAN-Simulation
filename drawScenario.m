@@ -11,6 +11,7 @@ figure(1); plot(b/2, h/2, "*r", 'MarkerSize', 3); % plots the central AP
 title('Scenario'); xlabel('x metres'); ylabel('y metres');
 
 figure(2); plot(distance, P_rx, '-rx');
+grid on;
 title('P_{RX} vs Distance'); xlabel('Distance (m)'); ylabel('Received power (dBm)');
 
 end
