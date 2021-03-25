@@ -1,11 +1,8 @@
-% Et paso aquest parell de funcions. Es una manera senzilla de calcular el 
-% throughput d'una estació. Seguint el que et deia ahir, et queda crear la 
-% xarxa, per cada estació calcular la distància entre l'AP i ella mateixa, 
-% calcular la potència rebuda, escollir el MCS a fer servir, i finalment 
-% treure el throughput que pot assolir cada estació. 
+
+
 
 % tic; % timer
-clear all; clc; hold on;
+clear; clc; hold on;
 i = 1; % iterator
 b = 15; h = 15; % base & height
 AP = [b/2 h/2]; % central AP
@@ -47,6 +44,6 @@ end
 distance = sort(distance,'ascend');
 P_rx = sort(P_rx,'descend');
 
-if (draw == 1); drawScenario(draw, b, h, P_rx, distance); end
+drawScenario(draw, b, h, P_rx, distance); %end
 
 % toc; % timer

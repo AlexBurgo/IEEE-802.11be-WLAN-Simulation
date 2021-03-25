@@ -7,7 +7,7 @@
 % MCSbasic: basic data rate (set to the minimum rate of the BSS)
 % NSS: SU spatial streams.
 
-function [T] = wifiTransmissionTimeBasic(L,BW,MCS,MCSbasic,NSS,P_rx)
+function [T] = wifiTransmissionTimeBasic(L,BW,MCS,MCSbasic,NSS)
 
 dprop = 20/3E8; % Propagation delay
 

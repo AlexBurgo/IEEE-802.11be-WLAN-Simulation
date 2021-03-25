@@ -1,6 +1,7 @@
 
 
-function MCS = MCS_for_160(P_rx)
+
+function MCS = mcsFor160(P_rx)
 
     if P_rx > -73 && P_rx < -70 
         MCS = 0;
