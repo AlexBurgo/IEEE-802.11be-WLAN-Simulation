@@ -41,6 +41,31 @@ while i <= nSTAs
     i = i+1;
 end
 
+MaxCycles = 5;
+time = 0;
+prob_err = 0.1;
+SuccTx = zeros(1, nSTAs);
+Throughput = zeros(1, nSTAs);
+
+for i = 1:MaxCycles
+
+    for j = 1:nSTAs
+        Ts = TxToSTA(j); % transmition time of each station
+        %wifiTransmissionTimeBasic()
+
+        if (rand() < prob_err) 
+            SuccTx(j) = SuccTx(j) + 1; % successful transmissions/cycle in each STA
+        end
+
+        time = time + Ts; % time addition
+    end
+
+end
+
+for s = 1:NSTas
+    Throughput(s) = L * TxToSTA(s) / time;
+end
+
 distance = sort(distance,'ascend');
 P_rx = sort(P_rx,'descend');
 
