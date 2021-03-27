@@ -37,7 +37,7 @@ while i <= nSTAs
     distance(i) = distanceToAP(AP,coordinates(i,1),coordinates(i,2));
     P_rx(i) = STAPowerReceived(P_tx, distance(i), lambda, L_o, k, W); % received power
     fprintf("--------------- STA number %d ---------------\n\n", i);
-    SingleSTA_throughput(P_rx(i));
+    singleSTA_throughput(P_rx(i));
     i = i+1;
 end
 
