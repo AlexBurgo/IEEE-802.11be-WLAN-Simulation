@@ -7,7 +7,7 @@
 % bàsicament vol dir que si augmentem l'amplada de banda que utilitzem, 
 % pot ser necessari fer servir un MCS inferior, i no acabar guanyant res.
 
-function SingleSTA_throughput(P_rx)
+function singleSTA_throughput(P_rx)
 
 % An AP tx to a STA using MCS = 8
 % since there are no other STAs, MCSbasic = MCS
