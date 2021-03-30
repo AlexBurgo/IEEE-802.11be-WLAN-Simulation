@@ -1,5 +1,5 @@
 
-
+% minimum receiver input sensitivity for 20 MHz
 
 function MCS = mcsFor20(P_rx)
 

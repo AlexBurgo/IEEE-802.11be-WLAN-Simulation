@@ -1,5 +1,5 @@
 
-
+% minimum receiver input sensitivity for 40 MHz
 
 function MCS = mcsFor40(P_rx)
 

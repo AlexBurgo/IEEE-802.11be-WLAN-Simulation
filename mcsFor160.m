@@ -1,5 +1,5 @@
 
-
+% minimum receiver input sensitivity for 160 MHz
 
 function MCS = mcsFor160(P_rx)
 

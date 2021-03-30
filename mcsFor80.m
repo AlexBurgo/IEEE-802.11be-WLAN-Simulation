@@ -1,5 +1,5 @@
 
-
+% minimum receiver input sensitivity for 80 MHz
 
 function MCS = mcsFor80(P_rx)
 
