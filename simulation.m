@@ -16,7 +16,7 @@ W = 0.1467;     % average number of traversed walls per meter
 lambda = 2.06;  % attenuation factor
 L_o = 54.1200;  % path loss intercept
 
-NSS = 2; % SU spatial streams.
+NSS = 4; % SU spatial streams.
 BW = 20; % bandwidth (MHz)
 
 P_rx = zeros(nSTAs,1);         % initialize array received power
@@ -81,11 +81,11 @@ end
 
 % Throughput = TxSTA_i * L / suma (TxSTA_j, per tot j)
 
-for s = 1:nSTAs
-    throughput(s) = length * (TxSTA(s) / time);
-    throughput(s) = throughput(s) / 1E6; % scale bps to Mbps
-    fprintf("--- STA number %d --- \n", s);
-    fprintf("Throughput = %.6f Mbps \n\n", throughput(s));
+for i = 1:nSTAs
+    throughput(i) = length * (TxSTA(i) / time);
+    throughput(i) = throughput(i) / 1E6; % scale bps to Mbps
+    fprintf("--- STA number %d --- \n", i);
+    fprintf("Throughput = %.6f Mbps \n\n", throughput(i));
 
 end
 

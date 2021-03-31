@@ -6,6 +6,7 @@
 % MCS: data rate
 % MCSbasic: basic data rate (set to the minimum rate of the BSS)
 % NSS: SU spatial streams.
+% NS: Data Subcarriers
 
 function [T] = wifiTransmissionTimeBasic(L, BW, MCS, MCSbasic, NSS, distance)
 
@@ -13,16 +14,16 @@ dprop = distance/3E8; % Propagation delay
 
 switch BW
     case 20
-        Ns = 234;
+        Ns = 234; % 242-Tone RU 
         
     case 40
-        Ns = 468;
+        Ns = 468; % 484-Tone RU
         
     case 80
-        Ns = 980;
+        Ns = 980; % 996-Tone RU
         
     case 160
-        Ns= 2*980;
+        Ns= 2*980; % 2x996 Tone RU
         
     case 320
         Ns = 4*980; % 11be (at 6 GHz)
