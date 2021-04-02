@@ -8,7 +8,20 @@
 % NSS: SU spatial streams.
 % NS: Data Subcarriers
 
-function [T] = wifiTransmissionTimeBasic(L, BW, MCS, MCSbasic, NSS, distance)
+% Primer de tot, respecte a la connexió, tingues en compte que és 'el mateix' tant
+% si és uplink o downlink. Una STA s'associa a l'AP, i fa servir el mateix
+% MCS tant per paquets que s'envien de l'STA a l'AP, com de l'AP a l'STA.
+
+% Quan acabis així, pots considerar el cas uplink, on l'únic que caldrà fer és 
+% afegir una trama 'nova' que és el trigger, que permet a l'AP seleccionar quina
+% STA pot transmetre, o quin conjunt d'STAs a la vegada fent servir ODFMA, per exemple.
+
+% A trigger frame contains the following information: 
+% i) list of user stations involved in the transmission, and ii) user-specific 
+% information (e.g., RU and spatial stream allocation, 'MCS').
+% User stations, after receiving this frame, start to transmit in the assigned resources.
+
+function [SU_DL_Time, SU_UL_Time] = wifiTransmissionTimeBasic(nSTAs, L_data, BW, MCS, MCSbasic, NSS, distance)
 
 dprop = distance/3E8; % Propagation delay
 
@@ -33,13 +46,19 @@ switch BW
 end
 
 BOslots = 7.5; % BE AC
-T_phy = 20E-6;
-L_sf = 16;
-L_tail = 6;
-L_header = 272;
-Lrts = 160;
-Lcts = 112;
-Lack = 112;
+T_phy = 20E-6; % legacy preamble
+
+% Frame lengths (bits)
+L_sf = 16;      % service field     
+L_tail = 6;     % tail bits    
+L_header = 272; % mac header
+Lrts = 160;     % request to send
+Lcts = 112;     % clear to send
+Lack = 112;     % acknowledgement
+L_Back = 256;   % block acknowledgement
+L_MSBack = 176 + 288 * nSTAs; % Multi-station BACK (MS-BACK)
+Ltrigger = 224 + 48 * nSTAs; % Basic trigger
+L_MU_trigger = 224 + 40 * nSTAs; % % MU-RTS trigger
 
 SIFS = 10E-6; % Short Inter-Frame Space
 DIFS = 31E-6; % Distributed Inter-Frame Space
@@ -116,15 +135,38 @@ end
 DBPS = DBPS * Ns * NSS;
 DBPSbasic = DBPSbasic * Ns;
 
-T_ofdm = 16E-6;
+T_ofdm = 16E-6; 
 
+% duration of control frames
 T_bo = BOslots * B_slot; % backoff slot 
-T_rts = T_phy + ceil(Lrts / DBPSbasic) * T_ofdm; % request-to-send 
+T_rts = T_phy + ceil(Lrts / DBPSbasic) * T_ofdm; % request-to-send
+T_MUrts = T_phy + ceil(L_sf + L_MU_trigger + L_tail / DBPSbasic) * T_ofdm; % request-to-send
 T_cts = T_phy + ceil(Lcts / DBPSbasic) * T_ofdm; % clear-to-send
-T_data = T_phy + ceil((L_sf + L_header + L + L_tail) / DBPS) * T_ofdm; % data frame
 T_ack = T_phy + ceil(Lack / DBPSbasic) * T_ofdm; % acknowledgement
+T_Back = T_phy + ceil((L_sf + L_Back + L_tail) / DBPSbasic) * T_ofdm;
+T_MSBack = T_phy + ceil((L_sf + L_MSBack + L_tail) / DBPSbasic) * T_ofdm; 
+T_trigger = T_phy + ceil((L_sf + Ltrigger + L_tail) / DBPSbasic) * T_ofdm; 
 
-T = T_bo + T_rts + dprop + SIFS + T_cts + dprop + SIFS + ... 
-    T_data + dprop + SIFS + T_ack + dprop + DIFS; % total time
+% duration of the data frame
+T_data_SU = T_phy + ceil((L_sf + L_header + L_data + L_tail) / DBPS) * T_ofdm; 
+T_data_MU_UL = T_phy + ceil((L_sf + L_header + L_data + L_tail) / DBPS) * T_ofdm;
+T_data_MU_DL = T_phy + ceil((L_sf + L_header + L_data + L_tail) / DBPS) * T_ofdm;
+
+% Single User Downlink Transmission (SU DL)
+SU_DL_Time = T_bo + T_rts + dprop + SIFS + T_cts + dprop + SIFS + ...
+    T_data_SU + dprop + SIFS + T_ack + dprop + DIFS; % total time SU DL
+
+% Single User Uplink Transmission (SU UL)   
+SU_UL_Time = T_bo + T_rts + dprop + SIFS + T_cts + dprop + SIFS + T_trigger + ... 
+    dprop + SIFS + T_data_SU + dprop + SIFS + T_ack + dprop + DIFS; % total time SU UL
+
+% Multi User Downlinl Transmission (MU DL)
+MU_DL_Time = T_MUrts + dprop + SIFS + T_cts + dprop + SIFS + T_data_MU_DL + ...
+    dprop + SIFS + T_Back + dprop + DIFS;
+
+% Multi User Uplink Transmission (MU UL)
+MU_UL_Time = T_MUrts + dprop + SIFS + T_cts + dprop + SIFS + T_trigger + ...
+    dprop + SIFS + T_data_MU_UL + dprop + SIFS + T_MSBack + dprop + DIFS; % total time MU UL
+
 
 end

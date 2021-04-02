@@ -1,11 +1,11 @@
 
 
 
-function [TxToSTA] = STATransmissionTime(NSS, BW, P_rx, Length, distance)
+function [DL_TxToSTA, UL_TxToSTA] = STATransmissionTime(nSTAs, NSS, BW, P_rx, Length, distance)
 
-MCS = modulationSelection(BW,P_rx); % modulation coding scheme
+MCS = modulationSelection(BW,P_rx); % modulation and coding scheme
 MCSbasic = MCS;
 
-[TxToSTA] = wifiTransmissionTimeBasic(Length, BW, MCS, MCSbasic, NSS, distance);
+[DL_TxToSTA, UL_TxToSTA] = wifiTransmissionTimeBasic(nSTAs, Length, BW, MCS, MCSbasic, NSS, distance);
 
 end

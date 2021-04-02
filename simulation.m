@@ -56,17 +56,18 @@ drawScenario(draw, b, h, P_rx, distance);
 time = 0;
 MaxCycles = 1;
 prob_err = 0.25;
-TxSTA = zeros(1, nSTAs);
+DL_TxSTA = zeros(1, nSTAs);
+UL_TxSTA = zeros(1, nSTAs);
 SuccTx = zeros(1, nSTAs);
 throughput = zeros(1, nSTAs);
 
-length = 12e3; % packet size (bits)
+length = 12e3; % data packet size (bits)
 
 for i = 1:MaxCycles % TxtoSTA_1 ... TxtoSTA_N-1 TxtoSTA_N || TxtoSTA_1 ... TxtoSTA_N-1 TxtoSTA_N
 
     for j = 1:nSTAs
         % Ts = TxToSTA(j); % transmition time of each station
-        TxSTA(j) = STATransmissionTime(NSS, BW, P_rx(j), length, distance(j));
+        [DL_TxSTA(j), UL_TxSTA(j)] = STATransmissionTime(nSTAs, NSS, BW, P_rx(j), length, distance(j));
 
         if (rand() < prob_err)
             SuccTx(j) = SuccTx(j) + 1; % successful transmissions/cycle in each STA
@@ -74,7 +75,7 @@ for i = 1:MaxCycles % TxtoSTA_1 ... TxtoSTA_N-1 TxtoSTA_N || TxtoSTA_1 ... TxtoS
         end
 
         % time -> total time to transmit the packet to all STAs
-        time = time + TxSTA(j); % time addition,
+        time = time + DL_TxSTA(j); % time addition
     end
 
 end
@@ -82,11 +83,12 @@ end
 % Throughput = TxSTA_i * L / suma (TxSTA_j, per tot j)
 
 for i = 1:nSTAs
-    throughput(i) = length * (TxSTA(i) / time);
+    throughput(i) = length * DL_TxSTA(i) / time;
     throughput(i) = throughput(i) / 1E6; % scale bps to Mbps
     fprintf("--- STA number %d --- \n", i);
     fprintf("Throughput = %.6f Mbps \n\n", throughput(i));
 
 end
 
+%fprintf("Uplink Transmission: %d seconds\n", UL_TxSTA);
 % toc; % timer
