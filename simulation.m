@@ -53,14 +53,14 @@ P_rx = sort(P_rx,'descend');
 drawScenario(draw, b, h, P_rx, distance); 
 
 
-time = 0;
+DL_time = 0;
+UL_time = 0;
 MaxCycles = 1;
 prob_err = 0.25;
 DL_TxSTA = zeros(1, nSTAs);
 UL_TxSTA = zeros(1, nSTAs);
 SuccTx = zeros(1, nSTAs);
 throughput = zeros(1, nSTAs);
-
 length = 12e3; % data packet size (bits)
 
 for i = 1:MaxCycles % TxtoSTA_1 ... TxtoSTA_N-1 TxtoSTA_N || TxtoSTA_1 ... TxtoSTA_N-1 TxtoSTA_N
@@ -75,20 +75,32 @@ for i = 1:MaxCycles % TxtoSTA_1 ... TxtoSTA_N-1 TxtoSTA_N || TxtoSTA_1 ... TxtoS
         end
 
         % time -> total time to transmit the packet to all STAs
-        time = time + DL_TxSTA(j); % time addition
+        DL_time = DL_time + DL_TxSTA(j); % DL time addition
+        UL_time = UL_time + UL_TxSTA(j); % UL time addition
+
     end
 
 end
 
 % Throughput = TxSTA_i * L / suma (TxSTA_j, per tot j)
-
+% Downlink
+fprintf("---------------- DOWNLINK TRANSMISSION -------------- \n");
 for i = 1:nSTAs
-    throughput(i) = length * DL_TxSTA(i) / time;
+    throughput(i) = length * DL_TxSTA(i) / DL_time;
     throughput(i) = throughput(i) / 1E6; % scale bps to Mbps
     fprintf("--- STA number %d --- \n", i);
     fprintf("Throughput = %.6f Mbps \n\n", throughput(i));
 
 end
 
-%fprintf("Uplink Transmission: %d seconds\n", UL_TxSTA);
+% Uplink
+fprintf("---------------- UPLINK TRANSMISSION ---------------- \n");
+for i = 1:nSTAs
+    throughput(i) = length * UL_TxSTA(i) / UL_time;
+    throughput(i) = throughput(i) / 1E6; % scale bps to Mbps
+    fprintf("--- STA number %d --- \n", i);
+    fprintf("Throughput = %.6f Mbps \n\n", throughput(i));
+
+end
+
 % toc; % timer
