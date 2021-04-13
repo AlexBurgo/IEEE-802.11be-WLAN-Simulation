@@ -11,11 +11,12 @@ function drawScenario(draw_scenario, b, h, P_rx, distance)
         hold on;
         figure(1); plot(b / 2, h / 2, "*r", 'MarkerSize', 3); % plots the central AP
         title('Scenario'); xlabel('x metres'); ylabel('y metres');
+        legend('STAs');
+
+        figure(2); plot(distance, P_rx, '-rx');
+        grid on;
+        title('P_{RX} vs Distance'); xlabel('Distance (m)'); ylabel('Received power (dBm)');
+        legend('P_{rx}');
 
     end
-
-    figure(2); plot(distance, P_rx, '-rx');
-    grid on;
-    title('P_{RX} vs Distance'); xlabel('Distance (m)'); ylabel('Received power (dBm)');
-
 end
