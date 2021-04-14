@@ -8,19 +8,6 @@
 % NSS: SU spatial streams.
 % NS: Data Subcarriers
 
-% Primer de tot, respecte a la connexió, tingues en compte que és 'el mateix' tant
-% si és uplink o downlink. Una STA s'associa a l'AP, i fa servir el mateix
-% MCS tant per paquets que s'envien de l'STA a l'AP, com de l'AP a l'STA.
-
-% Quan acabis així, pots considerar el cas uplink, on l'únic que caldrà fer és 
-% afegir una trama 'nova' que és el trigger, que permet a l'AP seleccionar quina
-% STA pot transmetre, o quin conjunt d'STAs a la vegada fent servir ODFMA, per exemple.
-
-% A trigger frame contains the following information: 
-% i) list of user stations involved in the transmission, and ii) user-specific 
-% information (e.g., RU and spatial stream allocation, 'MCS').
-% User stations, after receiving this frame, start to transmit in the assigned resources.
-
 function [SU_DL_Time, SU_UL_Time] = wifiTransmissionTimeBasic(nSTAs, L_data, BW, MCS, MCSbasic, NSS, distance)
 
 dprop = distance/3E8; % Propagation delay
