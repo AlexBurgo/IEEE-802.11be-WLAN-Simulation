@@ -14,20 +14,20 @@ dprop = distance/3E8; % Propagation delay
 
 switch BW
     case 20
-        Ns = 234; % 242-Tone RU 
-        
+        Ns = 234; % 242-Tone RU
+
     case 40
         Ns = 468; % 484-Tone RU
-        
+
     case 80
         Ns = 980; % 996-Tone RU
-        
+
     case 160
-        Ns= 2*980; % 2x996 Tone RU
-        
+        Ns = 2 * 980; % 2x996 Tone RU
+
     case 320
-        Ns = 4*980; % 11be (at 6 GHz)
-        
+        Ns = 4 * 980; % 11be (at 6 GHz)
+
     otherwise
         Ns = -1;
 end
@@ -147,7 +147,7 @@ SU_DL_Time = T_bo + T_rts + dprop + SIFS + T_cts + dprop + SIFS + ...
 SU_UL_Time = T_bo + T_rts + dprop + SIFS + T_cts + dprop + SIFS + T_trigger + ... 
     dprop + SIFS + T_data_SU + dprop + SIFS + T_ack + dprop + DIFS; % total time SU UL
 
-% Multi User Downlinl Transmission (MU DL)
+% Multi User Downlink Transmission (MU DL)
 MU_DL_Time = T_MUrts + dprop + SIFS + T_cts + dprop + SIFS + T_data_MU_DL + ...
     dprop + SIFS + T_Back + dprop + DIFS;
 

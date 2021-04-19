@@ -3,13 +3,9 @@
 
 function [best_BW, MCS, MCSbasic] = optimization(BW, P_rx)
 
-%    if optimization == 0
-%        best_Bw = 20;
-%    end
-
+    % BW = [20, 40, 80, 160, 320];
     nBW = size(BW, 2);
     possible_MCS = zeros(1, nBW); % initialize possible_MCS array
-    best_BW = 0;
 
     % get all possible MCS
     for i = 1:nBW
