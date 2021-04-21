@@ -8,9 +8,10 @@
 % NSS: SU spatial streams.
 % NS: Data Subcarriers
 
-function [SU_DL_Time, SU_UL_Time] = wifiTransmissionTimeBasic(nSTAs, L_data, BW, MCS, MCSbasic, NSS, distance)
+function [SU_DL_Time, SU_UL_Time, Nframes] = wifiTransmissionTimeBasic(nSTAs, L_data, BW, MCS, MCSbasic, NSS, distance)
 
 dprop = distance/3E8; % Propagation delay
+Nframes = 256; % number of aggregated frames in A-MPDU
 
 switch BW
     case 20
@@ -34,18 +35,22 @@ end
 
 BOslots = 7.5; % BE AC
 T_phy = 20E-6; % legacy preamble
+T_ofdm = 16E-6; 
 
 % Frame lengths (bits)
 L_sf = 16;      % service field     
 L_tail = 6;     % tail bits    
 L_header = 272; % mac header
-Lrts = 160;     % request to send
-Lcts = 112;     % clear to send
-Lack = 112;     % acknowledgement
+L_rts = 160;     % request to send
+L_cts = 112;     % clear to send
+L_ack = 112;     % acknowledgement
 L_Back = 256;   % block acknowledgement
 L_MSBack = 176 + 288 * nSTAs; % Multi-station BACK (MS-BACK)
-Ltrigger = 224 + 48 * nSTAs; % Basic trigger
+L_trigger = 224 + 48 * nSTAs; % Basic trigger
 L_MU_trigger = 224 + 40 * nSTAs; % % MU-RTS trigger
+
+% Frame lengths for A-MPDU (bits)
+L_delimiter = 31 * 8;
 
 SIFS = 10E-6; % Short Inter-Frame Space
 DIFS = 31E-6; % Distributed Inter-Frame Space
@@ -122,38 +127,45 @@ end
 DBPS = DBPS * Ns * NSS;
 DBPSbasic = DBPSbasic * Ns;
 
-T_ofdm = 16E-6; 
-
 % duration of control frames
 T_bo = BOslots * B_slot; % backoff slot 
-T_rts = T_phy + ceil(Lrts / DBPSbasic) * T_ofdm; % request-to-send
+T_rts = T_phy + ceil(L_rts / DBPSbasic) * T_ofdm; % request-to-send
 T_MUrts = T_phy + ceil(L_sf + L_MU_trigger + L_tail / DBPSbasic) * T_ofdm; % request-to-send
-T_cts = T_phy + ceil(Lcts / DBPSbasic) * T_ofdm; % clear-to-send
-T_ack = T_phy + ceil(Lack / DBPSbasic) * T_ofdm; % acknowledgement
+T_cts = T_phy + ceil(L_cts / DBPSbasic) * T_ofdm; % clear-to-send
+T_ack = T_phy + ceil(L_ack / DBPSbasic) * T_ofdm; % acknowledgement
 T_Back = T_phy + ceil((L_sf + L_Back + L_tail) / DBPSbasic) * T_ofdm;
 T_MSBack = T_phy + ceil((L_sf + L_MSBack + L_tail) / DBPSbasic) * T_ofdm; 
-T_trigger = T_phy + ceil((L_sf + Ltrigger + L_tail) / DBPSbasic) * T_ofdm; 
+T_trigger = T_phy + ceil((L_sf + L_trigger + L_tail) / DBPSbasic) * T_ofdm; 
 
 % duration of the data frame
-T_data_SU = T_phy + ceil((L_sf + L_header + L_data + L_tail) / DBPS) * T_ofdm; 
+T_data_aMPDU = T_phy + ceil((L_sf + Nframes * (L_delimiter + L_header + L_data) + L_tail) / DBPS) * T_ofdm;
+
+while T_data_aMPDU >= 5e-3 % PPDU < 5 ms
+    Nframes = Nframes - 1;
+    T_data_aMPDU = T_phy + ceil((L_sf + ...
+        Nframes * (L_delimiter + L_header + L_data) + L_tail) / DBPS) * T_ofdm;
+end
+
+% T_data_SU = T_phy + ceil((L_sf + L_header + L_data + L_tail) / DBPS) * T_ofdm; % NO frame aggregation
 T_data_MU_UL = T_phy + ceil((L_sf + L_header + L_data + L_tail) / DBPS) * T_ofdm;
 T_data_MU_DL = T_phy + ceil((L_sf + L_header + L_data + L_tail) / DBPS) * T_ofdm;
 
+% WITH A-MPDU
 % Single User Downlink Transmission (SU DL)
 SU_DL_Time = T_bo + T_rts + dprop + SIFS + T_cts + dprop + SIFS + ...
-    T_data_SU + dprop + SIFS + T_ack + dprop + DIFS; % total time SU DL
+    T_data_aMPDU + dprop + SIFS + T_Back + dprop + DIFS; 
 
 % Single User Uplink Transmission (SU UL)   
 SU_UL_Time = T_bo + T_rts + dprop + SIFS + T_cts + dprop + SIFS + T_trigger + ... 
-    dprop + SIFS + T_data_SU + dprop + SIFS + T_ack + dprop + DIFS; % total time SU UL
+    dprop + SIFS + T_data_aMPDU + dprop + SIFS + T_Back + dprop + DIFS; 
 
 % Multi User Downlink Transmission (MU DL)
 MU_DL_Time = T_MUrts + dprop + SIFS + T_cts + dprop + SIFS + T_data_MU_DL + ...
-    dprop + SIFS + T_Back + dprop + DIFS;
+    dprop + SIFS + T_Back + dprop + DIFS; 
 
 % Multi User Uplink Transmission (MU UL)
 MU_UL_Time = T_MUrts + dprop + SIFS + T_cts + dprop + SIFS + T_trigger + ...
-    dprop + SIFS + T_data_MU_UL + dprop + SIFS + T_MSBack + dprop + DIFS; % total time MU UL
+    dprop + SIFS + T_data_MU_UL + dprop + SIFS + T_MSBack + dprop + DIFS; 
 
 
 end

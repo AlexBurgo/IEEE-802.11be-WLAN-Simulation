@@ -1,10 +1,11 @@
 
 
 
-function [SuccTx, DL_time, UL_time] = roundRobin(MaxCycles, nSTAs, NSS, P_rx, length, distance, SuccTx, optimization_flag)
+function [SuccTx, DL_time, UL_time, frames] = roundRobin(MaxCycles, nSTAs, NSS, P_rx, length, distance, SuccTx, optimization_flag)
 
     DL_TxSTA = zeros(1, nSTAs);
     UL_TxSTA = zeros(1, nSTAs);
+    frames = zeros(1, nSTAs);
     DL_time = 0; UL_time = 0;
     prob_err = 0.05;
 
@@ -12,7 +13,11 @@ function [SuccTx, DL_time, UL_time] = roundRobin(MaxCycles, nSTAs, NSS, P_rx, le
 
         for j = 1:nSTAs
             % Ts = TxToSTA(j); % transmition time of each station
-            [DL_TxSTA(j), UL_TxSTA(j)] = STATransmissionTime(nSTAs, NSS, P_rx(j), length, distance(j), optimization_flag);
+            [DL_TxSTA(j), UL_TxSTA(j), Nframes] = STATransmissionTime(nSTAs, NSS, P_rx(j), ... 
+                length, distance(j), optimization_flag);
+            if i < 2
+                frames(j) = Nframes;
+            end
             err = rand();
 
             if (err > prob_err)

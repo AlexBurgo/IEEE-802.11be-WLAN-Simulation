@@ -19,13 +19,13 @@ function [distance, P_rx] = room(nSTAs, b, h, AP, draw)
 
         % random position generation of STAs
         j = 1;
-        %xSTA = rand * b; % x random position
+        % xSTA = rand * b; % x random position
         xSTA = fixedpos(i) .* b; % x random position
         coordinates(i, j) = xSTA;
         j = 2;
 
         while j == 2
-            %ySTA = rand * h; % y random position
+            % ySTA = rand * h; % y random position
             ySTA = fixedpos(i) .* h; % y random position
             coordinates(i, j) = ySTA;
             break;
