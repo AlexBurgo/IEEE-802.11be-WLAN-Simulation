@@ -31,6 +31,8 @@ function MCS = mcsFor80(P_rx)
         MCS = 12;
     elseif P_rx > -40 
         MCS = 13;
+    elseif P_rx <= -76
+        MCS = 0;
     end
 
 end

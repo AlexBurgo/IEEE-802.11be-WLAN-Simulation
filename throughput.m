@@ -24,6 +24,6 @@ function throughput(nSTAs, SuccTx, length, MaxCycles, DL_time, UL_time, frames)
     S = [DL_throughput; UL_throughput];
     bar(c, S);
     ylabel('Throughput [Mbps]');
-    %legend('STA 1','STA 2','STA 3','STA 4');
+    legend('STA 1','STA 2','STA 3','STA 4');
 
 end

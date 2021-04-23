@@ -7,7 +7,7 @@ function [DL_TxToSTA, UL_TxToSTA, Nframes] = STATransmissionTime(nSTAs, NSS, P_r
         BW = [20, 40, 80, 160, 320];
         [best_BW, MCS, MCSbasic] = optimization(BW, P_rx);
     else
-        best_BW = 20; % change to obtain different results
+        best_BW = 160; % change to obtain different results
         MCS = modulationSelection(best_BW, P_rx);
         MCSbasic = MCS;
     end

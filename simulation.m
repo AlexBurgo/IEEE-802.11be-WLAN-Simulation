@@ -7,7 +7,7 @@ b = 15; h = 15;   % base & height dimensions in 'meters'
 AP = [b/2 h/2];   % central access point
 nSTAs = 4;        % number of stations
 MaxCycles = 1e6;  % # round robin cycles
-NSS = 16;          % SU spatial streams.
+NSS = 4;          % SU spatial streams.
 length = 12e3;    % data packet size (bits)
 SuccTx = zeros(1, nSTAs);
 

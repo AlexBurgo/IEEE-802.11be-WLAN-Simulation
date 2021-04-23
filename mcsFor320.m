@@ -31,6 +31,8 @@ function MCS = mcsFor320(P_rx)
         MCS = 12; 
     elseif P_rx > -34 % 4096-QAM
         MCS = 13;
+    elseif P_rx <= -70
+        MCS = 0;
     end
 
 end

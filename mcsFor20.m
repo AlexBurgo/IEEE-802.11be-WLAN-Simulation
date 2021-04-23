@@ -31,6 +31,8 @@ function MCS = mcsFor20(P_rx)
         MCS = 12;
     elseif P_rx > -46
         MCS = 13;
+    elseif P_rx <= -82
+        MCS = 0;
     end
 
 end
