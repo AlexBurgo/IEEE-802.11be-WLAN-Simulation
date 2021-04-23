@@ -1,7 +1,7 @@
 
 
 
-function [best_BW, MCS, MCSbasic] = optimization(BW, P_rx)
+function [best_BW, MCS, MCSbasic] = mcsOptimization(BW, P_rx)
 
     % BW = [20, 40, 80, 160, 320];
     nBW = size(BW, 2);
