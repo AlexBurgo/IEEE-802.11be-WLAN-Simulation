@@ -13,7 +13,7 @@ function [SuccTx, DL_time, UL_time, frames] = roundRobin(MaxCycles, nSTAs, NSS, 
 
         for j = 1:nSTAs
             % Ts = TxToSTA(j); % transmition time of each station
-            [DL_TxSTA(j), UL_TxSTA(j), Nframes] = STATransmissionTime(nSTAs, NSS, P_rx(j), ... 
+            [DL_TxSTA(j), UL_TxSTA(j), Nframes] = wifiTransmissionTimeBasic(nSTAs, NSS, P_rx(j), ...
                 length, distance(j), optimization);
             if i < 2
                 frames(j) = Nframes;
