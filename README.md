@@ -9,7 +9,6 @@ Results obtained with the following parameters:
 * Optimization ON
 * Fixed Positions
 
-<p align="center">
 ![](images/A-MPDU_OPTI.png)
-</p>
+
 
