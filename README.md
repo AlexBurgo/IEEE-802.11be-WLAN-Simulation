@@ -10,6 +10,6 @@ Results obtained with the following parameters:
 * Fixed Positions
 
 <p align="center">
-    ![](images/A-MPDU_OPTI.png)
+![](images/A-MPDU_OPTI.png)
 </p>
 
