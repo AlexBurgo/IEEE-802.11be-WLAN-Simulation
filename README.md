@@ -1,4 +1,4 @@
-# TFG Matlab Project Code
+# NO Aggregation
 
 ## Developers 
 * [Alex Burgo](https://github.com/AlexBurgo) 
