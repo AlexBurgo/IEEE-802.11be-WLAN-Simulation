@@ -8,12 +8,12 @@
 % NSS: SU spatial streams.
 % NS: Data Subcarriers
 
-function [SU_DL_Time, SU_UL_Time, Nframes] = wifiTransmissionTimeBasic(nSTAs, NSS, P_rx, L_data, distance, optimization)
+function [SU_DL_Time, SU_UL_Time, Nframes] = wifiTransmissionTimeBasic(nSTAs, NSS, P_rx, L_data, distance, opti)
 
 dprop = distance/3E8; % Propagation delay
 Nframes = 256; % number of aggregated frames in A-MPDU
 
-if optimization == 1
+if opti == 1
     [DBPS, DBPSbasic] = optimization(P_rx, NSS);
 else
     BW = 80; % change to obtain different results
