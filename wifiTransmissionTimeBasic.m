@@ -14,7 +14,7 @@ dprop = distance/3E8; % Propagation delay
 Nframes = 256; % number of aggregated frames in A-MPDU
 
 if optimization == 1
-    [DBPS, DBPSbasic] = mcsOptimization(P_rx, NSS);
+    [DBPS, DBPSbasic] = optimization(P_rx, NSS);
 else
     BW = 80; % change to obtain different results
     switch BW % selects the number of subcarriers
