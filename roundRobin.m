@@ -12,7 +12,7 @@ function [SuccTx, DL_time, UL_time] = roundRobin(MaxCycles, nSTAs, NSS, P_rx, le
 
         for j = 1:nSTAs
 
-            [DL_TxSTA(j), UL_TxSTA(j)] = STATransmissionTime(nSTAs, NSS, P_rx(j), ...
+            [DL_TxSTA(j), UL_TxSTA(j)] = wifiTransmissionTimeBasic(nSTAs, NSS, P_rx(j), ... 
                 length, distance(j), opti);
             err = rand();
 
