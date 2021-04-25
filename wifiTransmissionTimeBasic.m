@@ -8,17 +8,6 @@
 % NSS: SU spatial streams.
 % NS: Data Subcarriers
 
-% Vaja, doncs no, clarament, no pot ser. Revisa com fas l'optimització, per què
-% alguna cosa falla allà. Es podria donar que amb optimització anès igual, però
-% mai que vagi pitjor, clar. La idea de l'optimització és que trobes el produce
-% bits/simbol * coding rate * num. subcarriers (B) que maximitza el rate, per 
-% tant ... no pot anar mai pitjor.
-
-% Ja em diràs que vas descobrint. En tot cas, també t'has de preguntar perquè amb
-% optimització els throughputs de les estacions son diferents. L'única raó possible
-% és per que agreguen menys paquets. Això és fàcil de comprovar en tot cas. Altrament,
-% força que agreguin totes 64 paquets, indep de si triguen més de 5ms, i a veure que surt.
-
 function [SU_DL_Time, SU_UL_Time, Nframes] = wifiTransmissionTimeBasic(nSTAs, NSS, P_rx, L_data, distance, optimization)
 
 dprop = distance/3E8; % Propagation delay
