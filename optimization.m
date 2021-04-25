@@ -1,7 +1,7 @@
 
 
 
-function [DBPS, DBPSbasic] = mcsOptimization(P_rx, NSS)
+function [DBPS, DBPSbasic] = optimization(P_rx, NSS)
 
     possible_BW = [20, 40, 80, 160, 320];
     Nsubc = [234, 468, 980, 1960, 3920]; % num. subcarriers
