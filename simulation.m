@@ -26,7 +26,7 @@ drawScenario(draw, b, h, P_rx, distance);
 
 % round-robin
 [SuccTx, DL_time, UL_time] = roundRobin(MaxCycles, nSTAs, ... 
-NSS, P_rx, length, distance, SuccTx, opti);
+    NSS, P_rx, length, distance, SuccTx, opti);
 
 % throughput operation
 throughput(nSTAs, SuccTx, length, MaxCycles, DL_time, UL_time)
