@@ -18,15 +18,15 @@ if draw == 1
     hold on;
 end
 
-[distance, P_rx] = room(nSTAs, b, h, AP, draw); 
+[distance, P_rx] = room(nSTAs, b, h, AP, draw);
 
 P_rx = sort(P_rx, 'descend');
 distance = sort(distance, 'ascend');
 drawScenario(draw, b, h, P_rx, distance);
 
 % round-robin
-[SuccTx, DL_time, UL_time, frames] = roundRobin(MaxCycles, nSTAs, ... 
-NSS, P_rx, length, distance, SuccTx, opti);
+[SuccTx, DL_time, UL_time, frames] = roundRobin(MaxCycles, nSTAs, ...
+    NSS, P_rx, length, distance, SuccTx, opti);
 
 % throughput calculus
 throughput(nSTAs, SuccTx, length, MaxCycles, DL_time, UL_time, frames)

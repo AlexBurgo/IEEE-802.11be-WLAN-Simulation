@@ -143,7 +143,6 @@ while T_data_aMPDU >= 5e-3 % PPDU < 5 ms
         Nframes * (L_delimiter + L_header + L_data) + L_tail) / DBPS) * T_ofdm;
 end
 
-% T_data_SU = T_phy + ceil((L_sf + L_header + L_data + L_tail) / DBPS) * T_ofdm; % NO frame aggregation
 T_data_MU_UL = T_phy + ceil((L_sf + L_header + L_data + L_tail) / DBPS) * T_ofdm;
 T_data_MU_DL = T_phy + ceil((L_sf + L_header + L_data + L_tail) / DBPS) * T_ofdm;
 
