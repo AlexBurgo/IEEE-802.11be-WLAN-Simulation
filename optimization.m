@@ -1,10 +1,5 @@
 
-% Si, és això el que has de fer, no hi ha més. 
-% Bé, hauràs de buscar escenaris on simplement la potència rebuda no permeti fer servir 320 MHz. 
-% Per cert, ara que em ve al cap. Si fas servir 2 spatial streams, també cal dividir la potència 
-% per 'stream'. Això està posat en el codi quan és calcula el MCS? Per exemple, si transmets a 
-% 20 dBm i reps -50 dBm amb 1 SS, fer servir 2 SS vol dir que transmets 17 dBm per SS, i per tant
-% reps -53 dBm per SS, i és aquest últim valor el que has de fer servir per calcular el MCS.
+
 
 function [DBPS, DBPSbasic] = optimization(P_rx, NSS)
 
@@ -17,7 +12,7 @@ possible_dBPS = zeros(1, n);
 
 % get all possible MCS
 for i = 1:n
-    possible_MCS(i) = modulationSelection(possible_BW(i), P_rx);
+    possible_MCS(i) = modulationSelection(possible_BW(i), P_rx, NSS);
 end
 
 for i = 1:n
@@ -63,6 +58,9 @@ end
 
 aux = max(possible_dBPS);
 indx = find(possible_dBPS == aux);
+if size(indx,2) > 1
+    indx = indx(end);
+end
 % BW = possible_BW(indx);
 Ns = Nsubc(indx);
 

@@ -11,12 +11,12 @@
 function [SU_DL_Time, SU_UL_Time, Nframes] = wifiTransmissionTimeBasic(nSTAs, NSS, P_rx, L_data, distance, opti)
 
 dprop = distance/3E8; % Propagation delay
-Nframes = 256; % number of aggregated frames in A-MPDU
+Nframes = 64; % number of aggregated frames in A-MPDU
 
 if opti == 1
     [DBPS, DBPSbasic] = optimization(P_rx, NSS);
 else
-    BW = 80; % change to obtain different results
+    BW = 320; % change to obtain different results
     switch BW % selects the number of subcarriers
         case 20
             Ns = 234; % 242-Tone RU
@@ -31,7 +31,7 @@ else
         otherwise
             Ns = -1;
     end
-    MCS = modulationSelection(BW, P_rx);
+    MCS = modulationSelection(BW, P_rx, NSS);
     MCSbasic = MCS;
     switch MCS
         case 0
@@ -137,11 +137,11 @@ T_trigger = T_phy + ceil((L_sf + L_trigger + L_tail) / DBPSbasic) * T_ofdm;
 % duration of the data frame
 T_data_aMPDU = T_phy + ceil((L_sf + Nframes * (L_delimiter + L_header + L_data) + L_tail) / DBPS) * T_ofdm;
 
-while T_data_aMPDU >= 5e-3 % PPDU < 5 ms
-    Nframes = Nframes - 1;
-    T_data_aMPDU = T_phy + ceil((L_sf + ...
-        Nframes * (L_delimiter + L_header + L_data) + L_tail) / DBPS) * T_ofdm;
-end
+% while T_data_aMPDU >= 5e-3 % PPDU < 5 ms
+%     Nframes = Nframes - 1;
+%     T_data_aMPDU = T_phy + ceil((L_sf + ...
+%         Nframes * (L_delimiter + L_header + L_data) + L_tail) / DBPS) * T_ofdm;
+% end
 
 T_data_MU_UL = T_phy + ceil((L_sf + L_header + L_data + L_tail) / DBPS) * T_ofdm;
 T_data_MU_DL = T_phy + ceil((L_sf + L_header + L_data + L_tail) / DBPS) * T_ofdm;

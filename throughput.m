@@ -24,6 +24,7 @@ c = categorical({'Downlink', 'Uplink'});
 S = [DL_throughput; UL_throughput];
 bar(c, S);
 ylabel('Throughput [Mbps]');
+hold off;
 legend('STA 1','STA 2','STA 3','STA 4');
 
 end
