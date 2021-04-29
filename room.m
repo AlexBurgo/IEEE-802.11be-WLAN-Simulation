@@ -10,10 +10,6 @@ coordinates = zeros(nSTAs, 2); % initialize matrix coordinates
 fixedpos = [0.125 0.32 0.51 1];
 
 P_tx = 21; % transmitted power by AP in dBm
-k = 5.25; % attenuation of each wall
-W = 0.1467; % average number of traversed walls per meter
-lambda = 2.06; % attenuation factor
-L_o = 54.1200; % path loss intercept
 
 while i <= nSTAs
     
@@ -34,7 +30,7 @@ while i <= nSTAs
     if (draw == 1); plot(xSTA, ySTA, "*b", 'MarkerSize', 3); end % plots the STA
     
     distance(i) = distanceToAP(AP, coordinates(i, 1), coordinates(i, 2));
-    P_rx(i) = STAPowerReceived(P_tx, distance(i), lambda, L_o, k, W); % received power
+    P_rx(i) = STAPowerReceived(P_tx, distance(i)); % received power
     
     i = i + 1;
 end
