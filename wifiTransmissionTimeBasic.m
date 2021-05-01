@@ -15,7 +15,7 @@ dprop = distance/3E8; % Propagation delay
 if opti == 1
     [DBPS, DBPSbasic] = optimization(P_rx, NSS);
 else
-    BW = 80; % change to obtain different results
+    BW = 320; % change to obtain different results
     switch BW % selects the number of subcarriers
         case 20
             Ns = 234; % 242-Tone RU
@@ -30,7 +30,7 @@ else
         otherwise
             Ns = -1;
     end
-    MCS = modulationSelection(BW, P_rx);
+    MCS = modulationSelection(BW, P_rx, NSS);
     MCSbasic = MCS;
     switch MCS
         case 0
