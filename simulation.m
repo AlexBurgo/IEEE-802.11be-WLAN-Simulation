@@ -11,7 +11,7 @@ NSS = 2;          % SU spatial streams.
 length = 12e3;    % data packet size (bits)
 SuccTx = zeros(1, nSTAs);
 
-opti = 1;  % 1 - to activate MCS & BW optimization algorithm 0 - otherwise
+opti = 0;  % 1 - to activate MCS & BW optimization algorithm 0 - otherwise
 draw = 1;  % 1 - to plot the room 0 - otherwise.
 
 if draw == 1
@@ -25,8 +25,8 @@ distance = sort(distance, 'ascend');
 drawScenario(draw, b, h, P_rx, distance, coordinates);
 
 % round-robin
-[SuccTx, DL_time, UL_time, frames] = roundRobin(MaxCycles, nSTAs, ...
+[SuccTx, DL_time, UL_time, frames, Ts] = roundRobin(MaxCycles, nSTAs, ...
     NSS, P_rx, length, distance, SuccTx, opti);
 
 % throughput calculus
-throughput(nSTAs, SuccTx, length, MaxCycles, DL_time, UL_time, frames)
+throughput(nSTAs, SuccTx, length, DL_time, UL_time, frames, Ts, draw)

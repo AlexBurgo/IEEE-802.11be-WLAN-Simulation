@@ -1,5 +1,5 @@
-% Draw the scenario simulation area and the received power graphic per distance
 
+% Draw the scenario simulation area and the received power graphic per distance (RSSI)
 
 function drawScenario(draw_scenario, b, h, P_rx, distance, coordinates)
 
@@ -19,10 +19,10 @@ if draw_scenario == 1
     legend([p1 p2],{'AP', 'STAs'},'Orientation','horizontal');
     legend('boxoff')
     
-    figure(2); plot(distance, P_rx, '-rx');
+    figure(2); 
+    plot(distance, P_rx, '-ro');
     grid on;
-    title('P_{RX} vs Distance'); xlabel('Distance (m)'); ylabel('Received power (dBm)');
-    legend('P_{rx}');
-    
+    title('P_{rx} vs Distance'); xlabel('Distance (m)'); ylabel('Received Power (dBm)');   
+    legend('RSSI'); 
 end
 end

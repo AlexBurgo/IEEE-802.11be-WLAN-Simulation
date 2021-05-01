@@ -1,12 +1,12 @@
 
 
 
-function [SuccTx, DL_time, UL_time, frames] = roundRobin(MaxCycles, nSTAs, NSS, P_rx, length, distance, SuccTx, opti)
+function [SuccTx, DL_time, UL_time, frames, Ts] = roundRobin(MaxCycles, nSTAs, NSS, P_rx, length, distance, SuccTx, opti)
 
 DL_TxSTA = zeros(1, nSTAs);
 UL_TxSTA = zeros(1, nSTAs);
 frames = zeros(1, nSTAs);
-DL_time = 0; UL_time = 0;
+DL_time = 0; UL_time = 0; Ts = 0;
 prob_err = 0.05;
 
 for i = 1:MaxCycles % TxtoSTA_1 ... TxtoSTA_N-1 TxtoSTA_N || TxtoSTA_1 ... TxtoSTA_N-1 TxtoSTA_N
@@ -26,6 +26,7 @@ for i = 1:MaxCycles % TxtoSTA_1 ... TxtoSTA_N-1 TxtoSTA_N || TxtoSTA_1 ... TxtoS
         
         DL_time = DL_time + DL_TxSTA(j); % DL time addition
         UL_time = UL_time + UL_TxSTA(j); % UL time addition
+        Ts = Ts + (DL_TxSTA(j) + UL_TxSTA(j)); % Total time per STA addition
     end
     
 end

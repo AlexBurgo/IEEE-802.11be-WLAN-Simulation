@@ -11,9 +11,12 @@ possible_MCS = zeros(1, n); % initialize possible_MCS array
 possible_dBPS = zeros(1, n);
 
 % get all possible MCS
+%fprintf("MCS =  ");
 for i = 1:n
     possible_MCS(i) = modulationSelection(possible_BW(i), P_rx, NSS);
+%    fprintf("%d     ", possible_MCS(i));
 end
+%fprintf("\n");
 
 for i = 1:n
     
@@ -54,7 +57,9 @@ end
 
 for i = 1:n
     possible_dBPS(i) = rate(i) * Nsubc(i) * NSS;
+%    fprintf("%.1f ", possible_dBPS(i));
 end
+%fprintf("\n");
 
 aux = max(possible_dBPS);
 indx = find(possible_dBPS == aux);
