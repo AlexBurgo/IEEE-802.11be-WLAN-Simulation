@@ -8,7 +8,7 @@ P_rx = zeros(nSTAs, 1); % initialize array received power
 distance = zeros(nSTAs, 1); % initialize array distance
 coordinates = zeros(nSTAs, 2); % initialize matrix coordinates
 fixedposX = [0.46 0.31 0.74 0.85];
-fixedposY = [0.57 0.19 0.56 0.5];
+fixedposY = [0.57 0.19 0.81 0.5];
 
 P_tx = 21; % transmitted power by AP in dBm
 

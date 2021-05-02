@@ -6,27 +6,26 @@ function throughput(nSTAs, SuccTx, length, DL_time, UL_time, frames, Ts, draw)
 DL_throughput = zeros(1, nSTAs);
 UL_throughput = zeros(1, nSTAs);
 Ts_throughput = zeros(1, nSTAs);
-Ts = sum(Ts);
 
-fprintf("-------- DOWNLINK TRANSMISSION ------ \n");
+% fprintf("-------- DOWNLINK TRANSMISSION ------ \n");
 for i = 1:nSTAs
     DL_throughput(i) = SuccTx(i) * frames(i) * length / (DL_time);
     DL_throughput(i) = DL_throughput(i) / 1E6; % scale bps to Mbps
-    fprintf("S%d = %.6f Mbps \n", i, DL_throughput(i));
+%     fprintf("S%d = %.3f Mbps \n", i, DL_throughput(i));
 end
 
-fprintf("\n-------- UPLINK TRANSMISSION -------- \n");
+% fprintf("\n-------- UPLINK TRANSMISSION -------- \n");
 for i = 1:nSTAs
     UL_throughput(i) = SuccTx(i) * frames(i) * length / (UL_time);
     UL_throughput(i) = UL_throughput(i) / 1E6; % scale bps to Mbps
-    fprintf("S%d = %.6f Mbps \n", i, UL_throughput(i));
+%     fprintf("S%d = %.3f Mbps \n", i, UL_throughput(i));
 end
 
-fprintf("\n--------- TOTAL TRANSMISSION -------- \n");
+fprintf("--------- TOTAL TRANSMISSION -------- \n");
 for i = 1:nSTAs
     Ts_throughput(i) = SuccTx(i) * 2*frames(i) * length / (Ts);
     Ts_throughput(i) = Ts_throughput(i) / 1E6; % scale bps to Mbps
-    fprintf("S%d = %.6f Mbps \n", i, Ts_throughput(i));
+    fprintf("S%d = %.3f Mbps \n", i, Ts_throughput(i));
 end
 
 if draw == 1

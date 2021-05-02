@@ -1,8 +1,9 @@
 
 % minimum receiver input sensitivity for 80 MHz
 
-function MCS = mcsFor80(P_rx)
+function [MCS, prob_err] = mcsFor80(P_rx)
 
+prob_err = 0.05;
 if P_rx > -76 && P_rx <= -73
     MCS = 0;
 elseif P_rx > -73 && P_rx <= -71
@@ -33,6 +34,7 @@ elseif P_rx > -40
     MCS = 13;
 elseif P_rx <= -76
     MCS = 0;
+    prob_err = 1;
 end
 
 end
