@@ -14,10 +14,6 @@ SuccTx = zeros(1, nSTAs);
 opti = 1;  % 1 - to activate MCS & BW optimization algorithm 0 - otherwise
 draw = 1;  % 1 - to plot the room 0 - otherwise.
 
-if draw == 1
-    hold on;
-end
-
 [distance, P_rx, coordinates] = room(nSTAs, b, h, AP); 
 
 P_rx = sort(P_rx, 'descend');
