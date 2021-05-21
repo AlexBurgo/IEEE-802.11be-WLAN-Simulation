@@ -1,8 +1,9 @@
 
 % minimum receiver input sensitivity for 320 MHz
 
-function MCS = mcsFor320(P_rx)
+function [MCS, prob_err] = mcsFor320(P_rx)
 
+prob_err = 0.05;
 if P_rx > -70 && P_rx <= -67
     MCS = 0;
 elseif P_rx > -67 && P_rx <= -65
@@ -33,6 +34,7 @@ elseif P_rx > -34 % 4096-QAM
     MCS = 13;
 elseif P_rx <= -70
     MCS = 0;
+    prob_err = 1;
 end
 
 end

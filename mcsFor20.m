@@ -1,8 +1,9 @@
 
 % minimum receiver input sensitivity for 20 MHz
 
-function MCS = mcsFor20(P_rx)
+function [MCS, prob_err] = mcsFor20(P_rx)
 
+prob_err = 0.05;
 if P_rx > -82 && P_rx <= -79
     MCS = 0;
 elseif P_rx > -79 && P_rx <= -77
@@ -33,6 +34,7 @@ elseif P_rx > -46
     MCS = 13;
 elseif P_rx <= -82
     MCS = 0;
+    prob_err = 1;
 end
 
 end

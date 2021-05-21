@@ -1,7 +1,7 @@
 
 
 
-function [DBPS, DBPSbasic] = optimization(P_rx, NSS)
+function [DBPS, DBPSbasic, perr] = optimization(P_rx, NSS)
 
 possible_BW = [20, 40, 80, 160, 320];
 Nsubc = [234, 468, 980, 1960, 3920]; % num. subcarriers
@@ -9,15 +9,12 @@ n = size(possible_BW, 2);
 rate = zeros(1, n);
 possible_MCS = zeros(1, n); % initialize possible_MCS array
 possible_dBPS = zeros(1, n);
+prob_err = zeros(1, n);
 
 % get all possible MCS
-%fprintf("MCS =  ");
 for i = 1:n
-    possible_MCS(i) = modulationSelection(possible_BW(i), P_rx, NSS);
-    %    fprintf("%d     ", possible_MCS(i));
+    [possible_MCS(i), prob_err(i)] = modulationSelection(possible_BW(i), P_rx, NSS);
 end
-
-%fprintf("\n");
 
 for i = 1:n
 
@@ -58,18 +55,24 @@ end
 
 for i = 1:n
     possible_dBPS(i) = rate(i) * Nsubc(i) * NSS;
-    %    fprintf("%.1f ", possible_dBPS(i));
 end
-%fprintf("\n");
+
+indx = 5;
+perr = prob_err(indx);
+
+while perr == 1
+    possible_dBPS(indx) = [];
+    indx = indx - 1;
+    perr = prob_err(indx);
+end
 
 aux = max(possible_dBPS);
 indx = find(possible_dBPS == aux);
-if size(indx, 2) > 1
+if size(indx,2) > 1
     indx = indx(end);
 end
-% BW = possible_BW(indx);
-Ns = Nsubc(indx);
 
+Ns = Nsubc(indx);
 DBPS = rate(indx);
 DBPSbasic = rate(indx);
 DBPS = DBPS * Ns * NSS;
