@@ -41,7 +41,7 @@ else
         case 2
             DBPS = 3/4 * 2; % QPSK
         case 3
-            DBPS = 2/3 * 4; % 16-QAM
+            DBPS = 1/2 * 4; % 16-QAM
         case 4
             DBPS = 3/4 * 4; % 16-QAM
         case 5
@@ -73,7 +73,7 @@ else
         case 2
             DBPSbasic = 3/4 * 2; % QPSK
         case 3
-            DBPSbasic = 2/3 * 4; % 16-QAM
+            DBPSbasic = 1/2 * 4; % 16-QAM
         case 4
             DBPSbasic = 3/4 * 4; % 16-QAM
         case 5
