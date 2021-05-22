@@ -26,7 +26,7 @@ for i = 1:n
         case 2
             rate(i) = 3/4 * 2; % QPSK
         case 3
-            rate(i) = 2/3 * 4; % 16-QAM
+            rate(i) = 1/2 * 4; % 16-QAM
         case 4
             rate(i) = 3/4 * 4; % 16-QAM
         case 5
