@@ -11,7 +11,7 @@ NSS = 2;          % SU spatial streams.
 length = 12e3;    % data packet size (bits)
 SuccTx = zeros(1, nSTAs);
 
-opti = 1;  % 1 - to activate MCS & BW optimization algorithm 0 - otherwise1
+opti = 1;  % 1 - to activate MCS & BW optimization algorithm 0 - otherwise
 draw = 1;  % 1 - to plot figures 0 - otherwise.
 
 [distance, P_rx, coordinates] = room(nSTAs, b, h, AP);

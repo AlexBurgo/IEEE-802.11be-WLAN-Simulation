@@ -16,13 +16,13 @@ while i <= nSTAs
     
     % random position generation of STAs
     j = 1;
-    % xSTA = rand * b; % x random position
+    %xSTA = rand * b; % x random position
     xSTA = fixedposX(i) .* b; % x random position
     coordinates(i, j) = xSTA;
     j = 2;
     
     while j == 2
-        % ySTA = rand * h; % y random position
+        %ySTA = rand * h; % y random position
         ySTA = fixedposY(i) .* h; % y random position
         coordinates(i, j) = ySTA;
         break;
