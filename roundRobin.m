@@ -11,7 +11,7 @@ DL_time = 0; UL_time = 0; Ts = 0;
 for i = 1:MaxCycles % TxtoSTA_1 ... TxtoSTA_N-1 TxtoSTA_N || TxtoSTA_1 ... TxtoSTA_N-1 TxtoSTA_N
     
     for j = 1:nSTAs
-        % Ts = TxToSTA(j); % transmition time of each station
+        
         [DL_TxSTA(j), UL_TxSTA(j), Nframes, prob_err] = wifiTransmissionTimeBasic(nSTAs, NSS, P_rx(j), ...
             length, distance(j), opti);
         if i < 2
