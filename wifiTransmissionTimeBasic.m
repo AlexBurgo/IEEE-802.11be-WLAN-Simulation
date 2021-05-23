@@ -118,7 +118,7 @@ L_trigger = 224 + 48 * nSTAs; % Basic trigger
 L_MU_trigger = 224 + 40 * nSTAs; % % MU-RTS trigger
 
 % Frame lengths for A-MPDU (bits)
-L_delimiter = 31 * 8;
+L_delimiter = 32;
 
 SIFS = 10E-6; % Short Inter-Frame Space
 DIFS = 31E-6; % Distributed Inter-Frame Space
