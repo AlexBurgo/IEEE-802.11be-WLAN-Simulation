@@ -103,7 +103,7 @@ end
 
 BOslots = 7.5; % BE AC
 T_phy = 20E-6; % legacy preamble
-T_ofdm = 16E-6; 
+T_ofdm = 16E-6; % OFDM symbol duration
 
 % Frame lengths (bits)
 L_sf = 16;      % service field     
@@ -122,10 +122,10 @@ L_delimiter = 32;
 
 SIFS = 10E-6; % Short Inter-Frame Space
 DIFS = 31E-6; % Distributed Inter-Frame Space
-B_slot = 9E-6;
+B_slot = 9E-6; % backoff slot duaration
 
 % duration of control frames
-T_bo = BOslots * B_slot; % backoff slot 
+T_bo = BOslots * B_slot; % backoff time
 T_rts = T_phy + ceil(L_rts / DBPSbasic) * T_ofdm; % request-to-send
 T_MUrts = T_phy + ceil(L_sf + L_MU_trigger + L_tail / DBPSbasic) * T_ofdm; % request-to-send
 T_cts = T_phy + ceil(L_cts / DBPSbasic) * T_ofdm; % clear-to-send
