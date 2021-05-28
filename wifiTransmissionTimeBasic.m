@@ -8,12 +8,12 @@
 % NSS: SU spatial streams.
 % NS: Data Subcarriers
 
-function [SU_DL_Time, SU_UL_Time, prob_err] = wifiTransmissionTimeBasic(nSTAs, NSS, P_rx, L_data, distance, opti)
+function [SU_DL_Time, SU_UL_Time, prob_err] = wifiTransmissionTimeBasic(nSTAs, SS, P_rx, L_data, distance, opti)
 
 dprop = distance/3E8; % Propagation delay
 
 if opti == 1
-    [DBPS, DBPSbasic, prob_err] = optimization(P_rx, NSS);
+    [DBPS, DBPSbasic, prob_err] = optimization(P_rx);
 else
     BW = 320; % change to obtain different results
     switch BW % selects the number of subcarriers
@@ -30,7 +30,7 @@ else
         otherwise
             Ns = -1;
     end
-    [MCS, prob_err] = modulationSelection(BW, P_rx, NSS);
+    [MCS, prob_err] = modulationSelection(BW, P_rx, SS);
     MCSbasic = MCS;
     switch MCS
         case 0
@@ -96,7 +96,7 @@ else
         otherwise
             DBPSbasic = 0;
     end
-    DBPS = DBPS * Ns * NSS;
+    DBPS = DBPS * Ns * SS;
     DBPSbasic = DBPSbasic * Ns;
 end
 
