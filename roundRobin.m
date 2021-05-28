@@ -1,7 +1,7 @@
 
 
 
-function [SuccTx, DL_time, UL_time, frames, Ts] = roundRobin(MaxCycles, nSTAs, NSS, P_rx, length, distance, SuccTx, opti)
+function [SuccTx, DL_time, UL_time, frames, Ts] = roundRobin(MaxCycles, nSTAs, SS, P_rx, length, distance, SuccTx, opti)
 
 DL_TxSTA = zeros(1, nSTAs);
 UL_TxSTA = zeros(1, nSTAs);
@@ -12,7 +12,7 @@ for i = 1:MaxCycles % TxtoSTA_1 ... TxtoSTA_N-1 TxtoSTA_N || TxtoSTA_1 ... TxtoS
     
     for j = 1:nSTAs
         
-        [DL_TxSTA(j), UL_TxSTA(j), Nframes, prob_err] = wifiTransmissionTimeBasic(nSTAs, NSS, P_rx(j), ...
+        [DL_TxSTA(j), UL_TxSTA(j), Nframes, prob_err] = wifiTransmissionTimeBasic(nSTAs, SS, P_rx(j), ...
             length, distance(j), opti);
         if i < 2
             frames(j) = Nframes;

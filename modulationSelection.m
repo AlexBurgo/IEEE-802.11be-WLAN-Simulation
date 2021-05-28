@@ -1,9 +1,9 @@
 
 
 
-function [MCS, prob_err] = modulationSelection(BW, P_rx, NSS)
+function [MCS, prob_err] = modulationSelection(BW, P_rx, SS)
 
-P_rx =  P_rx - 10*log10(NSS); % We reduce 3dB every time we double the channel
+P_rx =  P_rx - 10*log10(SS); % We reduce 3dB every time we double the channel
 
 switch BW
     case 20

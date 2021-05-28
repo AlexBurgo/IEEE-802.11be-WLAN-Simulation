@@ -7,7 +7,7 @@ b = 35; h = 35;   % base & height dimensions in 'meters'
 AP = [b/2 h/2];   % central access point
 nSTAs = 4;        % number of stations
 MaxCycles = 1e6;  % # round robin cycles
-NSS = 2;          % SU spatial streams.
+SS = 16;          % SU spatial streams.
 length = 12e3;    % data packet size (bits)
 SuccTx = zeros(1, nSTAs);
 
@@ -22,7 +22,7 @@ drawScenario(draw, b, h, P_rx, distance, coordinates);
 
 % round-robin
 [SuccTx, DL_time, UL_time, frames, Ts] = roundRobin(MaxCycles, nSTAs, ...
-    NSS, P_rx, length, distance, SuccTx, opti);
+    SS, P_rx, length, distance, SuccTx, opti);
 
 % throughput calculus
 throughput(nSTAs, SuccTx, length, DL_time, UL_time, frames, Ts, draw)
