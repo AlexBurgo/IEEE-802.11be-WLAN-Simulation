@@ -8,7 +8,34 @@ if draw_scenario == 1
     pgon = polyshape([0 0 b h], [h 0 0 b]); % creates the simulation area
     pg = plot(pgon);    % plots the simulation area
     pg.FaceAlpha = 0;   % transparency 'ON' of the area
-    
+
+%     hold on;
+%     p = nsidedpoly(1000, 'Center', [b/2 b/2], 'Radius', 23.0176);
+%     pcir2 = plot(p);
+%     pcir2.FaceAlpha = 0.04;
+%
+%     hold on;
+%     p = nsidedpoly(1000, 'Center', [b/2 b/2], 'Radius', 13.6141);
+%     pcir = plot(p);
+%     pcir.FaceAlpha = 0;
+%     
+%     hold on;
+%     p = nsidedpoly(1000, 'Center', [b/2 b/2], 'Radius', 11.3844);
+%     pcir = plot(p);
+%     pcir.FaceColor = 'r';
+%     pcir.FaceAlpha = 0.01;
+%     
+%     hold on;
+%     p = nsidedpoly(1000, 'Center', [b/2 b/2], 'Radius', 9.6552);
+%     pcir = plot(p);
+%     pcir.FaceAlpha = 0;
+%     
+%     hold on;
+%     p = nsidedpoly(1000, 'Center', [b/2 b/2], 'Radius', 7.9196);
+%     pcir = plot(p);
+%     pcir.FaceColor = 'c';
+%     pcir.FaceAlpha = 0.1;
+
     hold on;
     figure(1);
     sz = 15;

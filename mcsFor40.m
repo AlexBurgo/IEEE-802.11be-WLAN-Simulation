@@ -33,6 +33,7 @@ elseif P_rx > -46 && P_rx <= -43
 elseif P_rx > -43
     MCS = 13;
 elseif P_rx <= -79
+    %disp('Error: No communication!');
     MCS = 0;
     prob_err = 1;
 end

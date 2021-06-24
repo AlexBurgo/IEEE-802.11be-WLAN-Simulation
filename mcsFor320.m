@@ -33,6 +33,7 @@ elseif P_rx > -37 && P_rx <= -34 % 4096-QAM
 elseif P_rx > -34 % 4096-QAM
     MCS = 13;
 elseif P_rx <= -70
+    %disp('Error: No communication!');
     MCS = 0;
     prob_err = 1;
 end

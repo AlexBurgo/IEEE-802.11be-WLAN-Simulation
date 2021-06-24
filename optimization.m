@@ -6,7 +6,8 @@ function [DBPS, DBPSbasic, prob_err] = optimization(P_rx)
 SS = [2, 4, 8, 16]; % possible spatial streams
 possible_BW = [20, 40, 80, 160, 320]; % possible channel width
 Nsubc = [234, 468, 980, 1960, 3920]; % num. subcarriers
-nss = size(SS,2);
+nss = size(SS,2); 
+err = zeros(1, nss);
 mDBPS = zeros(1, nss);
 DBPSbasic = zeros(1, nss);
 n = size(possible_BW, 2);
@@ -23,6 +24,7 @@ for j = 1:nss
         [possible_MCS(i), perr(i)] = modulationSelection(possible_BW(i), P_rx, SS(j));
     end
 
+    % get all possible rates
     for i = 1:n
         switch possible_MCS(i)
             case 0
@@ -58,11 +60,12 @@ for j = 1:nss
         end
     end
 
+    % get all possible dbps
     for i = 1:n
         possible_dBPS(i) = rate(i) * Nsubc(i) * SS(j);
     end
 
-    indx = 5;
+    indx = n;
     err(j) = perr(indx);
 
     while err(j) == 1 && indx > 1
@@ -88,7 +91,7 @@ for j = 1:nss
 
 end
 
-indx = 4;
+indx = nss;
 while err(indx) == 1 && indx > 1
     if err(1) == 1
         break;
